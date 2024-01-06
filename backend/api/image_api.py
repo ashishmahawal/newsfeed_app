@@ -9,7 +9,7 @@ import uuid
 image_router = APIRouter(prefix="/v1/image")
 
 image_store_util = ImageDataStoreUtils(env="local")
-image_metadata_store_helper = ImageMetadataStoreHelper(table_name="image")
+image_metadata_store_helper = ImageMetadataStoreHelper()
 
 @image_router.post("/upload")
 async def image_upload(request:Request,
