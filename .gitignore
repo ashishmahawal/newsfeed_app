@@ -1,0 +1,4 @@
+backend/.env
+imageDB
+**.pyc
+.DS_Store
