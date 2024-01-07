@@ -1,22 +1,24 @@
 from fastapi import APIRouter, UploadFile, Request, Response, Form, File
 from utils.image_datastore_utils import ImageDataStoreUtils
 from utils.sql_helper import ImageMetadataStoreHelper
-from models.image_api_models import ImageUploadRequest, ImageUploadResponse
+from models.image_api_models import ImageUploadRequest, ImageUploadResponse, PostDataResponse
 from datetime import datetime
 from dataclasses import asdict
 import uuid
 
 image_router = APIRouter(prefix="/v1/image")
-
 image_store_util = ImageDataStoreUtils(env="local")
 image_metadata_store_helper = ImageMetadataStoreHelper()
+post_data_helper = ImageMetadataStoreHelper()
 
 @image_router.post("/upload")
 async def image_upload(request:Request,
                        file: UploadFile = File(...),
                        userId: str = Form(...),
                        location:str = Form(...),
-                       tags:str = Form(...)):
+                       tags:str = Form(...),
+                       text: str = Form(...)
+                       ):
     
     image_data = await file.read()
     imageid = str(uuid.uuid4())
@@ -31,6 +33,10 @@ async def image_upload(request:Request,
                                                  createat=createdat,
                                                  location=location,
                                                  tags=tags)
+    post_data_helper.putPostData(postid=postid,
+                                 userid=userId,
+                                 text=text,
+                                 createat=createdat)
     
     image_upload_response:ImageUploadResponse = ImageUploadResponse(userId,postid,imageid,createdat)
     json_response = asdict(image_upload_response)

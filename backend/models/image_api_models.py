@@ -10,4 +10,8 @@ class ImageUploadResponse:
     postId: str
     imageId: str
     createAt: str
-    
+
+@dataclass
+class PostDataResponse:
+    postId: str
+    createAt: str
