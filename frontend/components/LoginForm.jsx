@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { Button, TextField, Typography, Container, CssBaseline, Avatar } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { makeStyles } from "@material-ui/core/styles";
+import Link from 'next/link';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -111,7 +112,12 @@ const LoginForm = () => {
           </Button>
         </form>
       </div>
+      <h5>
+  Don't have account  <Link href="/signup">Signup here!</Link>
+</h5>
+
     </Container>
+    
   );
 };
 

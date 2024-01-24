@@ -14,7 +14,7 @@ class ImageDataStoreUtils:
         if env == "local":
             # use minio http://127.0.0.1:9000 minioadmin:minioadmin
             self.client = Minio(
-                endpoint="127.0.0.1:9001",
+                endpoint="127.0.0.1:9000",
                 access_key="minioadmin",
                 secret_key="minioadmin",
                 secure=False
